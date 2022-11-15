@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="content align-items-center">
+    <div class="w-100 ">
+        <div class="login-left">
+
+            <div class="account-content">
+                <div class="login-header">
+                    <a href="#">
+                        <img src="~/template2/assets/img/logo-full.png" alt="">
+                    </a>
+                </div>
+                <div class="form-col">
+                    <div class="login-text-details">
+                        <h3>GİRİŞ YAP</h3>
+                        <p>Login with your Data that you entered during your Registration</p>
+                    </div>
+                    <form action="https://dreamschat.dreamguystech.com/template2/index.html">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control form-control-lg group_formcontrol" name="email" type="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Şifre</label>
+                            <input class="form-control form-control-lg group_formcontrol" name="password" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="custom-check d-flex">
+                                <input type="checkbox">Keep me logged in
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="pt-1">
+                            <div class="text-center">
+                                <button class="btn newgroup_create btn-block d-block w-100" type="submit">Giriş Yap</button>
+                            </div>
+                        </div>
+                        <div class="text-center dont-have">Don’t have an account? <a href="/Register/Index">Üye Ol</a></div>
+                        <div class="text-center mt-3">
+                            <span class="forgot-link">
+                                <a href="/Login/ForgotPassword" class="text-end">Şifreni Mi Unuttun ?</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="back-btn-col text-center">
+                    <a href="/Message/Chats"><span><i class="fas fa-caret-left"></i></span> Geri Dön</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="login-right">
+        </div>
+    </div>
+</div>
