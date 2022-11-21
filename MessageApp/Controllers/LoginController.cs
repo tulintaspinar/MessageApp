@@ -9,6 +9,11 @@ namespace MessageApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Index()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult ForgotPassword()
         {
