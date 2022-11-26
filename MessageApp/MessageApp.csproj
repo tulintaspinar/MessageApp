@@ -24,4 +24,8 @@
     <ProjectReference Include="..\MessageApp.EntityLayer\MessageApp.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UserImage\" />
+  </ItemGroup>
+
 </Project>

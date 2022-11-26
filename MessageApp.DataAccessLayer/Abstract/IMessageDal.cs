@@ -9,5 +9,8 @@ namespace MessageApp.DataAccessLayer.Abstract
 {
     public interface IMessageDal : IGenericDal<Message>
     {
+        List<Message> GetMessageByPhoneNumber(string phone);
+        List<Message> GetMessageByReceiver(int receiverID, string senderPhone); //kullanıcıya atılmış mesajları listeler
+        List<Message> GetMessageBySender(string receiverPhone,int receiverID); //bana atılmış mesajlar
     }
 }

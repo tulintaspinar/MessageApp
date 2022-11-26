@@ -13,9 +13,8 @@ namespace MessageApp.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-5CE3LGO;Database=UpSchoolDbMessage;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-5CE3LGO;Database=UpSchoolDbMessageApp;Integrated Security=True;");
         }
-        public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }

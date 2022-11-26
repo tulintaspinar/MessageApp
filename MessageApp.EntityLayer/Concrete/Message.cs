@@ -14,7 +14,8 @@ namespace MessageApp.EntityLayer.Concrete
         public string ReceiverPhone { get; set; } //alıcı telefon numarası
         public string SenderPhone { get; set; }
         public DateTime Date { get; set; }
-
+        public int AppUserID { get; set; }
+        public AppUser AppUser { get; set; }
 
     }
 }

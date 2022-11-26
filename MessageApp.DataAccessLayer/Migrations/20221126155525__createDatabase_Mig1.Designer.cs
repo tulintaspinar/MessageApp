@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MessageApp.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221121050225__createdDatabase")]
-    partial class _createdDatabase
+    [Migration("20221126155525__createDatabase_Mig1")]
+    partial class _createDatabase_Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,6 +77,9 @@ namespace MessageApp.DataAccessLayer.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -136,6 +139,9 @@ namespace MessageApp.DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -153,52 +159,9 @@ namespace MessageApp.DataAccessLayer.Migrations
 
                     b.HasKey("MessageID");
 
+                    b.HasIndex("AppUserID");
+
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("MessageApp.EntityLayer.Concrete.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FacebookLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InstagramLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LinkedinLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TwitterLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserLastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserNickName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserPhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YoutubeLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -302,6 +265,17 @@ namespace MessageApp.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("MessageApp.EntityLayer.Concrete.Message", b =>
+                {
+                    b.HasOne("MessageApp.EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Messages")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("MessageApp.EntityLayer.Concrete.AppRole", null)
@@ -351,6 +325,11 @@ namespace MessageApp.DataAccessLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MessageApp.EntityLayer.Concrete.AppUser", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

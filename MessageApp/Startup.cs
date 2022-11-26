@@ -1,5 +1,12 @@
+using MessageApp.BusinessLayer.Abstract;
+using MessageApp.BusinessLayer.Concrete;
+using MessageApp.DataAccessLayer.Abstract;
+using MessageApp.DataAccessLayer.Concrete;
+using MessageApp.DataAccessLayer.EntityFramework;
+using MessageApp.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MessageApp.Models;
 
 namespace MessageApp
 {
@@ -23,6 +31,15 @@ namespace MessageApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserDal, EfUserDal>();
+            services.AddScoped<IMessageDal, EfMessageDal>();
+
+
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IMessageService, MessageManager>();
+
+            services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddErrorDescriber<CustomeIdentityValidator>().AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews();
         }
 
@@ -41,7 +58,7 @@ namespace MessageApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -50,7 +67,7 @@ namespace MessageApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
