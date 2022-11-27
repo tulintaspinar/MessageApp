@@ -34,6 +34,11 @@ namespace MessageApp.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> Logout()
+        {
+            await _userManager.SignOutAsync();
+            return RedirectToAction("Index","Login");
+        }
     }
 }
 //tulin tuliN123*

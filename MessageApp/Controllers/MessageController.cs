@@ -57,12 +57,6 @@ namespace MessageApp.Controllers
             ViewBag.messages = messages.OrderBy(x=>x.Date);
             return View();
         }
-        public async Task<IActionResult> Status()
-        {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.UserPhoto = user.ImageUrl;
-            return View();
-        }
         [HttpGet]
         public async Task<IActionResult> Settings()
         {
@@ -77,7 +71,7 @@ namespace MessageApp.Controllers
             return View(user);
         }
         [HttpPost]
-        public async Task<IActionResult> Settings(UserEditViewModel userEditView)
+        public async Task<IActionResult> GeneralSetting(UserEditViewModel userEditView)
         {
             var result = await _userManager.FindByNameAsync(User.Identity.Name);
             if (userEditView.Image != null)
@@ -98,12 +92,29 @@ namespace MessageApp.Controllers
 
             var updateUser = await _userManager.UpdateAsync(result);
             if(updateUser.Succeeded)
-                return RedirectToAction("Chats","Message");
+                return RedirectToAction("Settings","Message");
             else
             {
                 ModelState.AddModelError("", "Bilgileriniz güncellenemedi.");
                 return View();
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> PasswordSetting(UserEditViewModel userEditView)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            if (userEditView.NewPassword == userEditView.ConfirmNewPassword)
+            {
+                var updateUser = await _userManager.ResetPasswordAsync(user, token, userEditView.NewPassword);
+                if (updateUser.Succeeded)
+                    return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Bilgileriniz güncellenemedi.");
+            }
+            return RedirectToAction("Settings", "Message");
         }
 
         [HttpPost]
@@ -145,6 +156,21 @@ namespace MessageApp.Controllers
 
             _messageManager.TInsert(newMessage);
             return RedirectToAction("ChatDetail", new { @id = receiverID });
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccount()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+
+                return RedirectToAction("Settings", "Messsage");
+            }
         }
     }
 }

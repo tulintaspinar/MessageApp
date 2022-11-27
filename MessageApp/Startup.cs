@@ -39,7 +39,9 @@ namespace MessageApp
             services.AddScoped<IMessageService, MessageManager>();
 
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>().AddErrorDescriber<CustomeIdentityValidator>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddErrorDescriber<CustomeIdentityValidator>()
+                    .AddEntityFrameworkStores<Context>()
+                    .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider); ;
             services.AddControllersWithViews();
         }
 

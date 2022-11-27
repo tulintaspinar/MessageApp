@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_MessageLayout.cshtml";
 }
 <div class="sidebar-group left-sidebar chat_sidebar">
-
     <div id="chats" class="left-sidebar-wrap sidebar active slimscroll">
         <div class="slimscroll">
 
@@ -13,7 +12,7 @@
                     <h4>PROFİLİM</h4>
                 </div>
                 <div class="btn-section">
-                    <button class="btn logout-btn">Çıkış Yap</button>
+                    <a href="/Login/Logout" class="btn logout-btn">ÇIKIŞ YAP</a>
                 </div>
             </div>
             <div class="settings-option">
@@ -36,7 +35,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -58,7 +56,7 @@
                     </div>
                     <div class="settings-control p-3">
                         <div class="form-col form-body">
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" enctype="multipart/form-data" action="/Message/GeneralSetting">
                                 <div class="row">
                                     <div class="col-md-12 col-xl-12">
                                         <div class="form-group">
@@ -79,13 +77,6 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-12">
-                                      @*  <div class="form-group">
-                                            <label>Profil Resmini Değiştir</label>
-                                            <div class="custom-input-file form-control form-control-lg group_formcontrol">
-                                                <label>SEÇ</label>
-                                                <input type="file" asp-for="Image">
-                                            </div>
-                                        </div>*@
                                         <div class="form-group">
                                             <label>RESİM YÜKLE</label>
                                             <input type="file" asp-for="Image" class="custom-input-file form-control form-control-lg group_formcontrol">
@@ -118,22 +109,26 @@
                             <div class="row">
                                 <div class="col-xl-4">
                                     <div class="form-col form-body">
-                                        <form method="post">
+                                        <form method="post" action="PasswordSetting">
+                                            <input type="hidden" asp-for="Token" />
                                             <div class="form-group">
                                                 <label>Mevcut Şifre</label>
-                                                <input class="form-control form-control-lg group_formcontrol" name="current-password" type="password">
+                                                <input class="form-control form-control-lg group_formcontrol" asp-for="Password" type="password">
+                                                <span class="text-danger" asp-validation-for="Password"></span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Yeni Şifre</label>
-                                                <input class="form-control form-control-lg group_formcontrol" name="new-password" type="password">
+                                                <input class="form-control form-control-lg group_formcontrol" asp-for="NewPassword" type="password">
+                                                <span class="text-danger" asp-validation-for="NewPassword"></span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Yeni Şifre Tekrar</label>
-                                                <input class="form-control form-control-lg group_formcontrol" name="confirm-password" type="password">
+                                                <input class="form-control form-control-lg group_formcontrol" asp-for="ConfirmNewPassword" type="password">
+                                                <span class="text-danger" asp-validation-for="ConfirmNewPassword"></span>
                                             </div>
                                             <div class="form-row profile_form m-0 align-items-center">
                                                 <div class="me-4">
-                                                    <button type="button" class="btn btn-update  mb-0">
+                                                    <button type="submit" class="btn btn-update  mb-0">
                                                        GÜNCELLE
                                                     </button>
                                                 </div>
@@ -151,11 +146,14 @@
                     <div class="settings-delete">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-md-12">
-                                <h5>Hesabını Sil</h5>
-                                <br />
-                                <h6>Hesabınız kalıcı olarak sileceksiniz.</h6>
-                                <br /><br />
-                               <button class="btn btn-update">HESABI SİL</button>
+                                <form method="post" asp-action="DeleteAccount">
+                                    <h5>Hesabını Sil</h5>
+                                    <br />
+                                    <h6>Hesabınız kalıcı olarak sileceksiniz.</h6>
+                                    <br /><br />
+                                    <button type="submit" class="btn btn-update">HESABI SİL</button>
+                                </form>
+
                             </div>
                         </div>                    
                     </div>
