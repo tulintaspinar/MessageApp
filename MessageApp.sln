@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageApp", "MessageApp\MessageApp.csproj", "{EC26C7D1-8EB9-4BC3-BB62-EB4479458AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageApp", "MessageApp\MessageApp.csproj", "{EC26C7D1-8EB9-4BC3-BB62-EB4479458AF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageApp.EntityLayer", "MessageApp.EntityLayer\MessageApp.EntityLayer.csproj", "{3D4D29E6-13E5-4093-BCA9-C719EC13F53B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageApp.EntityLayer", "MessageApp.EntityLayer\MessageApp.EntityLayer.csproj", "{3D4D29E6-13E5-4093-BCA9-C719EC13F53B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageApp.DataAccessLayer", "MessageApp.DataAccessLayer\MessageApp.DataAccessLayer.csproj", "{80AE4C63-CA9A-4F53-860C-110269B0C9CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageApp.DataAccessLayer", "MessageApp.DataAccessLayer\MessageApp.DataAccessLayer.csproj", "{80AE4C63-CA9A-4F53-860C-110269B0C9CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageApp.BusinessLayer", "MessageApp.BusinessLayer\MessageApp.BusinessLayer.csproj", "{CE093B88-E091-46A6-9739-F7335B829183}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageApp.BusinessLayer", "MessageApp.BusinessLayer\MessageApp.BusinessLayer.csproj", "{CE093B88-E091-46A6-9739-F7335B829183}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageApplication", "MessageApplication", "{FAF8DBB0-A605-4987-94F2-632898656601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC26C7D1-8EB9-4BC3-BB62-EB4479458AF9} = {FAF8DBB0-A605-4987-94F2-632898656601}
+		{3D4D29E6-13E5-4093-BCA9-C719EC13F53B} = {FAF8DBB0-A605-4987-94F2-632898656601}
+		{80AE4C63-CA9A-4F53-860C-110269B0C9CD} = {FAF8DBB0-A605-4987-94F2-632898656601}
+		{CE093B88-E091-46A6-9739-F7335B829183} = {FAF8DBB0-A605-4987-94F2-632898656601}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {997350BB-8F93-4D56-B741-7EC3840FA0B4}
